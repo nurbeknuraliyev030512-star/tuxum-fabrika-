@@ -3,316 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tuxum Yetkazib Berish va Hisob-kitob Tizimi</title>
-    <style>
-        :root {
-            --primary: #f59e0b;
-            --primary-hover: #d97706;
-            --bg: #f8fafc;
-            --card-bg: #ffffff;
-            --text: #1e293b;
-            --text-light: #64748b;
-            --danger: #ef4444;
-            --success: #10b981;
-            --border: #e2e8f0;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            padding-bottom: 70px;
-        }
-
-        header {
-            background-color: #1e293b;
-            color: white;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .logo {
-            font-size: 1.2rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 15px auto;
-            padding: 0 15px;
-        }
-
-        /* Navigatsiya */
-        nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: white;
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
-            border-top: 1px solid var(--border);
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
-            z-index: 100;
-        }
-
-        .nav-btn {
-            border: none;
-            background: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            font-size: 0.75rem;
-            color: var(--text-light);
-            cursor: pointer;
-            width: 25%;
-        }
-
-        .nav-btn.active {
-            color: var(--primary-hover);
-            font-weight: bold;
-        }
-
-        .nav-btn svg {
-            width: 22px;
-            height: 22px;
-            fill: currentColor;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        /* Kartochkalar va Vidjetlar */
-        .card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 15px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            border: 1px solid var(--border);
-        }
-
-        .card-title {
-            font-size: 1.1rem;
-            font-weight: bold;
-            margin-bottom: 12px;
-            color: var(--text);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-        }
-
-        .stat-box {
-            background: #f1f5f9;
-            padding: 12px 8px;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .stat-val {
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: var(--primary-hover);
-            margin-top: 4px;
-        }
-
-        .stat-lbl {
-            font-size: 0.75rem;
-            color: var(--text-light);
-        }
-
-        /* Forma elementlari */
-        .form-group {
-            margin-bottom: 12px;
-        }
-
-        label {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 4px;
-            color: var(--text-light);
-        }
-
-        input, select {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-size: 1rem;
-            outline: none;
-        }
-
-        input:focus, select:focus {
-            border-color: var(--primary);
-        }
-
-        .btn {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 8px;
-            background: var(--primary);
-            color: white;
-            font-weight: bold;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .btn:active {
-            transform: scale(0.98);
-        }
-
-        .btn-success { background: var(--success); }
-        .btn-danger { background: var(--danger); }
-        .btn-outline {
-            background: transparent;
-            border: 1px solid var(--border);
-            color: var(--text);
-        }
-
-        /* Marketlar ro'yxati */
-        .market-card {
-            border-left: 4px solid var(--primary);
-        }
-
-        .market-card.has-debt {
-            border-left-color: var(--danger);
-        }
-
-        .market-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-        }
-
-        .market-name {
-            font-weight: bold;
-            font-size: 1.05rem;
-        }
-
-        .market-owner {
-            font-size: 0.85rem;
-            color: var(--text-light);
-        }
-
-        .debt-badge {
-            background: #fee2e2;
-            color: var(--danger);
-            padding: 4px 8px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-
-        .action-btns {
-            display: flex;
-            gap: 8px;
-            margin-top: 12px;
-        }
-
-        .action-btn {
-            flex: 1;
-            padding: 8px;
-            font-size: 0.8rem;
-            border-radius: 6px;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .btn-call { background: #e0f2fe; color: #0284c7; }
-        .btn-sms { background: #dcfce7; color: #16a34a; }
-        .btn-barter { background: #fef3c7; color: #d97706; }
-
-        /* Kalkulyator natija bloki */
-        .calc-result {
-            background: #fffbeb;
-            border: 1px solid #fef3c7;
-            padding: 12px;
-            border-radius: 8px;
-            margin-top: 10px;
-        }
-
-        .calc-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 6px;
-            font-size: 0.9rem;
-        }
-
-        .calc-total {
-            border-top: 1px dashed #fde68a;
-            padding-top: 6px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            color: #b45309;
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.5);
-            z-index: 200;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .modal.open { display: flex; }
-
-        .modal-body {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            width: 100%;
-            max-width: 400px;
-        }
-    </style>
+    <title>Tuxum Yetkazib Berish Tizimi</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <!-- Yuqori panel -->
     <header>
         <div class="logo">
-            <span>🥚</span> Dadam uchun Tuxum-Dastur
+            <span>🥚</span> Tuxum Yetkazib Berish
         </div>
-        <div id="today-date" style="font-size: 0.8rem; opacity: 0.8;"></div>
+        <div id="today-date" class="date-text"></div>
     </header>
 
     <div class="container">
@@ -320,10 +21,10 @@
         <!-- Tab 1: Zakaz Olish va Kalkulyator -->
         <div id="tab-orders" class="tab-content active">
             <div class="card">
-                <div class="card-title">Yangi Zakaz / Kalkulyator</div>
+                <div class="card-title">Yangi Zakaz / Avto-Kalkulyator</div>
                 
                 <div class="form-group">
-                    <label>Marketni Tanlang:</label>
+                    <label for="order-market">Marketni Tanlang:</label>
                     <select id="order-market" onchange="calculateOrder()">
                         <option value="">-- Marketni tanlang --</option>
                     </select>
@@ -331,15 +32,15 @@
 
                 <div class="grid-3">
                     <div class="form-group">
-                        <label>Katta (1-tur)</label>
+                        <label for="qty-katta">Katta (1-tur)</label>
                         <input type="number" id="qty-katta" value="0" min="0" oninput="calculateOrder()">
                     </div>
                     <div class="form-group">
-                        <label>O'rtacha (2-tur)</label>
+                        <label for="qty-ortacha">O'rtacha (2-tur)</label>
                         <input type="number" id="qty-ortacha" value="0" min="0" oninput="calculateOrder()">
                     </div>
                     <div class="form-group">
-                        <label>Kichik (3-tur)</label>
+                        <label for="qty-kichik">Kichik (3-tur)</label>
                         <input type="number" id="qty-kichik" value="0" min="0" oninput="calculateOrder()">
                     </div>
                 </div>
@@ -360,18 +61,18 @@
                 </div>
 
                 <div class="form-group" style="margin-top: 12px;">
-                    <label>To'langan pul (Agar bersa):</label>
+                    <label for="paid-amount">Berilgan pul (Naqd/Karta):</label>
                     <input type="number" id="paid-amount" placeholder="0" oninput="calculateOrder()">
                 </div>
 
-                <button class="btn btn-success" style="margin-top: 10px;" onclick="saveOrder()">Zakazni Topshirish / Saqlash</button>
+                <button class="btn btn-success" style="margin-top: 10px;" onclick="saveOrder()">Zakazni Topshirish va Saqlash</button>
             </div>
 
             <!-- Bugungi zakazlar -->
             <div class="card">
-                <div class="card-title">Bugungi Zakazlar Ro'yxati</div>
+                <div class="card-title">Bugungi Berilgan Zakazlar</div>
                 <div id="today-orders-list">
-                    <p style="text-align: center; color: var(--text-light); font-size: 0.9rem;">Hali zakazlar kiritilmadi</p>
+                    <p class="empty-text">Hali bugun zakazlar kiritilmadi</p>
                 </div>
             </div>
         </div>
@@ -381,10 +82,10 @@
             <div class="card">
                 <div class="card-title">
                     <span>Marketlar Bazasi (20-25 ta)</span>
-                    <button class="btn" style="width: auto; padding: 6px 12px; font-size: 0.8rem;" onclick="openAddMarketModal()">+ Yangi</button>
+                    <button class="btn btn-small" onclick="openAddMarketModal()">+ Yangi</button>
                 </div>
                 <div class="form-group">
-                    <input type="text" id="search-market" placeholder="Market nomi bo'yicha qidirish..." oninput="renderMarkets()">
+                    <input type="text" id="search-market" placeholder="Market nomi yoki egasini qidiring..." oninput="renderMarkets()">
                 </div>
             </div>
 
@@ -394,23 +95,23 @@
         <!-- Tab 3: Ombor va Narxlar -->
         <div id="tab-stock" class="tab-content">
             <div class="card">
-                <div class="card-title">Joriy Narxlar Boshqaruvi</div>
+                <div class="card-title">Joriy Narxlar Sozlamasi</div>
                 <div class="form-group">
-                    <label>Katta Tuxum Narxi (dona):</label>
+                    <label for="price-katta">Katta Tuxum Narxi (dona):</label>
                     <input type="number" id="price-katta" value="1500" onchange="updatePrices()">
                 </div>
                 <div class="form-group">
-                    <label>O'rtacha Tuxum Narxi (dona):</label>
+                    <label for="price-ortacha">O'rtacha Tuxum Narxi (dona):</label>
                     <input type="number" id="price-ortacha" value="1300" onchange="updatePrices()">
                 </div>
                 <div class="form-group">
-                    <label>Kichik Tuxum Narxi (dona):</label>
+                    <label for="price-kichik">Kichik Tuxum Narxi (dona):</label>
                     <input type="number" id="price-kichik" value="1100" onchange="updatePrices()">
                 </div>
             </div>
 
             <div class="card">
-                <div class="card-title">Ombor Astatoki</div>
+                <div class="card-title">Ombordagi Tuxum Qoldig'i (Astatok)</div>
                 <div class="grid-3">
                     <div class="stat-box">
                         <div class="stat-lbl">Katta</div>
@@ -431,15 +132,15 @@
         <!-- Tab 4: Hisobot va Statistika -->
         <div id="tab-stats" class="tab-content">
             <div class="card">
-                <div class="card-title">Umumiy Ko'rsatkichlar</div>
-                <div class="grid-3" style="grid-template-columns: repeat(2, 1fr);">
+                <div class="card-title">Umumiy Hisobotlar</div>
+                <div class="grid-2">
                     <div class="stat-box">
                         <div class="stat-lbl">Jami Nasiya (Qarz)</div>
-                        <div class="stat-val" id="total-debt" style="color: var(--danger);">0 so'm</div>
+                        <div class="stat-val danger-text" id="total-debt">0 so'm</div>
                     </div>
                     <div class="stat-box">
-                        <div class="stat-lbl">Bugungi Sotuv</div>
-                        <div class="stat-val" id="today-sales" style="color: var(--success);">0 so'm</div>
+                        <div class="stat-lbl">Bugungi Sotuv Summasi</div>
+                        <div class="stat-val success-text" id="today-sales">0 so'm</div>
                     </div>
                 </div>
             </div>
@@ -450,14 +151,14 @@
     <!-- Barter Modal -->
     <div id="barter-modal" class="modal">
         <div class="modal-body">
-            <h3>Barter / Tovar ayirish</h3>
-            <p id="barter-market-name" style="margin-bottom: 10px; color: var(--text-light); font-size: 0.9rem;"></p>
+            <h3>Barter / Tovar Ayirish</h3>
+            <p id="barter-market-name" class="modal-sub"></p>
             <div class="form-group">
-                <label>Olingan tovar nomi (masalan: Un, Yog'):</label>
-                <input type="text" id="barter-item" placeholder="Maxsulot nomi">
+                <label for="barter-item">Olingan tovar nomi (masalan: Un, Yog'):</label>
+                <input type="text" id="barter-item" placeholder="Mahsulot nomini kiriting">
             </div>
             <div class="form-group">
-                <label>Tovar summasi (so'm):</label>
+                <label for="barter-amount">Tovar summasi (so'm):</label>
                 <input type="number" id="barter-amount" placeholder="0">
             </div>
             <button class="btn btn-success" onclick="applyBarter()">Qarzdan Ayirish</button>
@@ -465,7 +166,32 @@
         </div>
     </div>
 
-    <!-- Navigatsiya menyusi -->
+    <!-- Yangi Market Qo'shish Modali -->
+    <div id="add-market-modal" class="modal">
+        <div class="modal-body">
+            <h3>Yangi Market Qo'shish</h3>
+            <div class="form-group" style="margin-top: 10px;">
+                <label for="new-market-name">Market Nomi:</label>
+                <input type="text" id="new-market-name" placeholder="Masalan: Fayz Market">
+            </div>
+            <div class="form-group">
+                <label for="new-market-owner">Do'kon Egasi Ismi:</label>
+                <input type="text" id="new-market-owner" placeholder="Masalan: Alisher aka">
+            </div>
+            <div class="form-group">
+                <label for="new-market-phone">Telefon Raqami:</label>
+                <input type="text" id="new-market-phone" value="+998">
+            </div>
+            <div class="form-group">
+                <label for="new-market-location">Manzili / Joylashuvi:</label>
+                <input type="text" id="new-market-location" placeholder="Masalan: Chorsu bozori yonida">
+            </div>
+            <button class="btn btn-success" onclick="saveNewMarket()">Saqlash</button>
+            <button class="btn btn-outline" style="margin-top: 8px;" onclick="closeAddMarketModal()">Yopish</button>
+        </div>
+    </div>
+
+    <!-- Pastki Navigatsiya Menyusi -->
     <nav>
         <button class="nav-btn active" onclick="switchTab('orders', this)">
             <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
@@ -485,228 +211,6 @@
         </button>
     </nav>
 
-    <script>
-        // Ma'lumotlar bazasi (Boshlang'ich namuna)
-        let markets = [
-            { id: 1, name: "Iroda Market", owner: "Iroda opa", phone: "+998901234567", location: "Chorsu daxasi", debt: 450000 },
-            { id: 2, name: "Baraka Do'koni", owner: "Jasur aka", phone: "+998912345678", location: "Yunusobod 4-mavze", debt: 120000 },
-            { id: 3, name: "Oasis Supermarket", owner: "Mirzo aka", phone: "+998933456789", location: "Mirzo Ulug'bek ko'chasi", debt: 0 },
-            { id: 4, name: "Fayz Market", owner: "Hikmat aka", phone: "+998944567890", location: "Chilanzar 10", debt: 890000 },
-            { id: 5, name: "Zamin Do'koni", owner: "Anvar aka", phone: "+998955678901", location: "Sergeli 8", debt: 230000 }
-        ];
-
-        let prices = { katta: 1500, ortacha: 1300, kichik: 1100 };
-        let stock = { katta: 2500, ortacha: 1800, kichik: 900 };
-        let todayOrders = [];
-        let activeMarketForBarter = null;
-
-        // Dastur yuklanganda ishga tushadi
-        window.onload = function() {
-            document.getElementById('today-date').innerText = new Date().toLocaleDateString('uz-UZ');
-            populateMarketSelect();
-            renderMarkets();
-            updateStats();
-        };
-
-        // Tablarni almashtirish
-        function switchTab(tabId, btn) {
-            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById('tab-' + tabId).classList.add('active');
-            btn.classList.add('active');
-        }
-
-        // Marketlar selektini to'ldirish
-        function populateMarketSelect() {
-            let select = document.getElementById('order-market');
-            select.innerHTML = '<option value="">-- Marketni tanlang --</option>';
-            markets.forEach(m => {
-                select.innerHTML += `<option value="${m.id}">${m.name} (${m.owner})</option>`;
-            });
-        }
-
-        // Kalkulyator
-        function calculateOrder() {
-            let marketId = document.getElementById('order-market').value;
-            let qKatta = parseInt(document.getElementById('qty-katta').value) || 0;
-            let qOrtacha = parseInt(document.getElementById('qty-ortacha').value) || 0;
-            let qKichik = parseInt(document.getElementById('qty-kichik').value) || 0;
-            let paid = parseInt(document.getElementById('paid-amount').value) || 0;
-
-            let currentSum = (qKatta * prices.katta) + (qOrtacha * prices.ortacha) + (qKichik * prices.kichik);
-            let debt = 0;
-
-            if (marketId) {
-                let m = markets.find(x => x.id == marketId);
-                if (m) debt = m.debt;
-            }
-
-            let total = currentSum + debt - paid;
-
-            document.getElementById('res-current').innerText = currentSum.toLocaleString() + " so'm";
-            document.getElementById('res-debt').innerText = debt.toLocaleString() + " so'm";
-            document.getElementById('res-total').innerText = total.toLocaleString() + " so'm";
-        }
-
-        // Zakazni saqlash
-        function saveOrder() {
-            let marketId = document.getElementById('order-market').value;
-            let qKatta = parseInt(document.getElementById('qty-katta').value) || 0;
-            let qOrtacha = parseInt(document.getElementById('qty-ortacha').value) || 0;
-            let qKichik = parseInt(document.getElementById('qty-kichik').value) || 0;
-            let paid = parseInt(document.getElementById('paid-amount').value) || 0;
-
-            if (!marketId) {
-                alert("Iltimos, marketni tanlang!");
-                return;
-            }
-
-            let currentSum = (qKatta * prices.katta) + (qOrtacha * prices.ortacha) + (qKichik * prices.kichik);
-            let m = markets.find(x => x.id == marketId);
-
-            // Qarzdorlikni yangilash
-            let unpaid = currentSum - paid;
-            m.debt += unpaid;
-
-            // Ombor astatokini kamaytirish
-            stock.katta -= qKatta;
-            stock.ortacha -= qOrtacha;
-            stock.kichik -= qKichik;
-
-            // Bugungi zakazlarga qo'shish
-            todayOrders.push({
-                marketName: m.name,
-                katta: qKatta,
-                ortacha: qOrtacha,
-                kichik: qKichik,
-                sum: currentSum,
-                paid: paid
-            });
-
-            alert("Zakaz muvaffaqiyatli saqlandi va hisoblar yangilandi!");
-            
-            // Formalarni tozalash
-            document.getElementById('qty-katta').value = 0;
-            document.getElementById('qty-ortacha').value = 0;
-            document.getElementById('qty-kichik').value = 0;
-            document.getElementById('paid-amount').value = "";
-            calculateOrder();
-            renderMarkets();
-            renderTodayOrders();
-            updateStats();
-            updateStockUI();
-        }
-
-        // Marketlar ro'yxatini chiqarish
-        function renderMarkets() {
-            let list = document.getElementById('markets-list');
-            let search = document.getElementById('search-market').value.toLowerCase();
-            list.innerHTML = "";
-
-            markets.filter(m => m.name.toLowerCase().includes(search) || m.owner.toLowerCase().includes(search)).forEach(m => {
-                let hasDebt = m.debt > 0;
-                list.innerHTML += `
-                    <div class="card market-card ${hasDebt ? 'has-debt' : ''}">
-                        <div class="market-header">
-                            <div>
-                                <div class="market-name">${m.name}</div>
-                                <div class="market-owner">👤 ${m.owner} | 📍 ${m.location}</div>
-                            </div>
-                            <div class="debt-badge" style="${!hasDebt ? 'background:#dcfce7; color:#16a34a;' : ''}">
-                                ${hasDebt ? 'Qarz: ' + m.debt.toLocaleString() + ' so\'m' : 'Qarzsiz'}
-                            </div>
-                        </div>
-                        <div class="action-btns">
-                            <a href="tel:${m.phone}" class="action-btn btn-call">📞 Qo'ng'iroq</a>
-                            <button class="action-btn btn-sms" onclick="sendSMS('${m.phone}', '${m.name}', ${m.debt})">💬 SMS Eslatma</button>
-                            <button class="action-btn btn-barter" onclick="openBarterModal(${m.id})">🔄 Barter</button>
-                        </div>
-                    </div>
-                `;
-            });
-        }
-
-        // Bugungi zakazlar ro'yxatini render qilish
-        function renderTodayOrders() {
-            let container = document.getElementById('today-orders-list');
-            if (todayOrders.length === 0) {
-                container.innerHTML = `<p style="text-align: center; color: var(--text-light); font-size: 0.9rem;">Hali zakazlar kiritilmadi</p>`;
-                return;
-            }
-            container.innerHTML = "";
-            todayOrders.forEach(o => {
-                container.innerHTML += `
-                    <div style="border-bottom: 1px solid var(--border); padding: 8px 0; font-size: 0.9rem;">
-                        <strong>${o.marketName}</strong>: K:${o.katta} | O':${o.ortacha} | Ki:${o.kichik} — 
-                        <span style="color: var(--primary-hover); font-weight: bold;">${o.sum.toLocaleString()} so'm</span> 
-                        (To'landi: ${o.paid.toLocaleString()} so'm)
-                    </div>
-                `;
-            });
-        }
-
-        // SMS yuborish simulyatsiyasi
-        function sendSMS(phone, name, debt) {
-            if (debt <= 0) {
-                alert(name + " marketining qarzi yo'q!");
-                return;
-            }
-            let msg = `Hormang, ${name}! Sizning tuxum yetkazib berish xizmatidan joriy qarzingiz: ${debt.toLocaleString()} so'm. Iltimos, to'lovni o'z vaqtida amalga oshiring. Rahmat!`;
-            window.open(`sms:${phone}?body=${encodeURIComponent(msg)}`, '_blank');
-        }
-
-        // Barter modal oyna
-        function openBarterModal(marketId) {
-            activeMarketForBarter = markets.find(m => m.id == marketId);
-            document.getElementById('barter-market-name').innerText = activeMarketForBarter.name + " (" + activeMarketForBarter.debt.toLocaleString() + " so'm qarz)";
-            document.getElementById('barter-modal').classList.add('open');
-        }
-
-        function closeBarterModal() {
-            document.getElementById('barter-modal').classList.remove('open');
-        }
-
-        function applyBarter() {
-            let amount = parseInt(document.getElementById('barter-amount').value) || 0;
-            let item = document.getElementById('barter-item').value;
-
-            if (amount <= 0 || !item) {
-                alert("Iltimos, tovar nomi va summasini to'g'ri kiriting!");
-                return;
-            }
-
-            activeMarketForBarter.debt -= amount;
-            if (activeMarketForBarter.debt < 0) activeMarketForBarter.debt = 0;
-
-            alert(`${activeMarketForBarter.name} marketidan ${item} (${amount.toLocaleString()} so'm) qabul qilindi va qarzidan ayirildi!`);
-            closeBarterModal();
-            renderMarkets();
-            updateStats();
-        }
-
-        // Narxlarni yangilash
-        function updatePrices() {
-            prices.katta = parseInt(document.getElementById('price-katta').value) || 0;
-            prices.ortacha = parseInt(document.getElementById('price-ortacha').value) || 0;
-            prices.kichik = parseInt(document.getElementById('price-kichik').value) || 0;
-            calculateOrder();
-        }
-
-        // Ombor UI yangilash
-        function updateStockUI() {
-            document.getElementById('stock-katta').innerText = stock.katta.toLocaleString();
-            document.getElementById('stock-ortacha').innerText = stock.ortacha.toLocaleString();
-            document.getElementById('stock-kichik').innerText = stock.kichik.toLocaleString();
-        }
-
-        // Hisobotlarni yangilash
-        function updateStats() {
-            let totalDebt = markets.reduce((acc, m) => acc + m.debt, 0);
-            let todaySales = todayOrders.reduce((acc, o) => acc + o.sum, 0);
-
-            document.getElementById('total-debt').innerText = totalDebt.toLocaleString() + " so'm";
-            document.getElementById('today-sales').innerText = todaySales.toLocaleString() + " so'm";
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
