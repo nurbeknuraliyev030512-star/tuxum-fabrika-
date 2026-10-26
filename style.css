@@ -1,0 +1,299 @@
+:root {
+    --primary: #f59e0b;
+    --primary-hover: #d97706;
+    --bg: #f8fafc;
+    --card-bg: #ffffff;
+    --text: #1e293b;
+    --text-light: #64748b;
+    --danger: #ef4444;
+    --success: #10b981;
+    --border: #e2e8f0;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    padding-bottom: 70px;
+}
+
+header {
+    background-color: #1e293b;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 15px auto;
+    padding: 0 15px;
+}
+
+/* Pastki Navigatsiya Menyu */
+nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    border-top: 1px solid var(--border);
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+    z-index: 100;
+}
+
+.nav-btn {
+    border: none;
+    background: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.75rem;
+    color: var(--text-light);
+    cursor: pointer;
+    width: 25%;
+}
+
+.nav-btn.active {
+    color: var(--primary-hover);
+    font-weight: bold;
+}
+
+.nav-btn svg {
+    width: 22px;
+    height: 22px;
+    fill: currentColor;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Kartochkalar va Vidjetlar */
+.card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 15px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border: 1px solid var(--border);
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 12px;
+    color: var(--text);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.stat-box {
+    background: #f1f5f9;
+    padding: 12px 8px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.stat-val {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--primary-hover);
+    margin-top: 4px;
+}
+
+.stat-lbl {
+    font-size: 0.75rem;
+    color: var(--text-light);
+}
+
+/* Forma elementlari */
+.form-group {
+    margin-bottom: 12px;
+}
+
+label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--text-light);
+}
+
+input, select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+}
+
+input:focus, select:focus {
+    border-color: var(--primary);
+}
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: var(--primary);
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.btn-success { background: var(--success); }
+.btn-danger { background: var(--danger); }
+.btn-outline {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+}
+
+/* Marketlar ro'yxati dizayni */
+.market-card {
+    border-left: 4px solid var(--primary);
+}
+
+.market-card.has-debt {
+    border-left-color: var(--danger);
+}
+
+.market-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.market-name {
+    font-weight: bold;
+    font-size: 1.05rem;
+}
+
+.market-owner {
+    font-size: 0.85rem;
+    color: var(--text-light);
+}
+
+.debt-badge {
+    background: #fee2e2;
+    color: var(--danger);
+    padding: 4px 8px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.action-btns {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.action-btn {
+    flex: 1;
+    padding: 8px;
+    font-size: 0.8rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.btn-call { background: #e0f2fe; color: #0284c7; }
+.btn-sms { background: #dcfce7; color: #16a34a; }
+.btn-barter { background: #fef3c7; color: #d97706; }
+
+/* Kalkulyator natija bloki */
+.calc-result {
+    background: #fffbeb;
+    border: 1px solid #fef3c7;
+    padding: 12px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.calc-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+}
+
+.calc-total {
+    border-top: 1px dashed #fde68a;
+    padding-top: 6px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #b45309;
+}
+
+/* Modal oyna dizayni */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal.open { display: flex; }
+
+.modal-body {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    width: 100%;
+    max-width: 400px;
+}
